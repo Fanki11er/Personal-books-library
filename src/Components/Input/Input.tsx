@@ -7,7 +7,7 @@ interface Wrapper {
 const InputWrapper = styled.div`
   display: flex;
   width: ${(props: Wrapper) => (props.smaller ? "400px" : "500px")};
-  height: 100%;
+  height: 55px;
   justify-content: space-between;
   align-items: center;
 `;
@@ -25,7 +25,7 @@ const FormInput = styled.input`
   font-size: 18px;
   text-align: center;
   background-color: #e4e4e4;
-  margin: 20px;
+  margin: 5px 20px;
 `;
 
 interface Props {

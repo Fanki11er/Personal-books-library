@@ -10,6 +10,7 @@ import BooksList from "./Components/BooksList/BooksList";
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
+  min-height: 100vh;
 `;
 
 const LeftWrapper = styled.div`
