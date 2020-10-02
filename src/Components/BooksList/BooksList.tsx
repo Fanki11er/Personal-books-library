@@ -5,7 +5,7 @@ const ListsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  background-color: #e535ab;
+  background-color: #1d2355 /*#e535ab*/;
   text-align: center;
   align-items: center;
 `;
@@ -36,7 +36,7 @@ const InsideLists = styled.ul`
 
 const MiddleList = styled.li`
   color: #f5f5f5;
-  background-color: #f5f5f5;
+  background-color: #e4e4e4 /*#f5f5f5*/;
   color: #4b4b4b;
   font-size: 20px;
   list-style: none;
@@ -52,7 +52,8 @@ const Heading = styled.h2`
   border-radius: 30px;
   width: 200px;
   height: 50px;
-  box-shadow: 2px 4px 6px #4b4b4b;
+  box-shadow: 2px 4px 6px #e4e4e4;
+  background-color: #707070;
 `;
 
 const List = styled.li`
@@ -65,7 +66,7 @@ const List = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
+  background-color: #e4e4e4 /*#f5f5f5*/;
   color: #4b4b4b;
   font-size: 20px;
   list-style: none;

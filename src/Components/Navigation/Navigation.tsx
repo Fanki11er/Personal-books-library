@@ -23,17 +23,17 @@ const LangSwitch = styled.button`
   width: 8%;
   height: 4vh;
   border-radius: 30px;
-  border: 2px solid #e535ab;
+  border: 2px solid #1d2355 /*#e535ab*/;
   margin: 0 15px;
-  box-shadow: 2px 3px 6px #4b4b4b; /*#e535ab;*/
+  box-shadow: 2px 3px 6px #1d2355; /*#e535ab;*/
 `;
 
 const ColorSwitch = styled.button`
   border-radius: 30px;
   width: 8%;
   height: 4vh;
-  border: 2px solid #e535ab;
-  box-shadow: 2px 3px 6px #4b4b4b; /*#e535ab*/ ;
+  border: 2px solid #1d2355 /*#e535ab*/;
+  box-shadow: 2px 3px 6px #1d2355; /*#e535ab*/ ;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -43,13 +43,14 @@ const ButtonsWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  border: 2px solid #e535ab;
+  border: 2px solid #1d2355 /*#e535ab*/;
   border-radius: 30px;
-  box-shadow: 2px 3px 6px #e535ab;
+  box-shadow: 2px 3px 6px #1d2355 /*#e535ab*/;
   width: 200px;
   height: 40px;
   margin: 40px;
-  color: #707070;
+  color: #1d2355;
+  font-weight: bold;
 `;
 
 const SearchWrapper = styled.div`

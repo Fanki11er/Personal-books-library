@@ -21,7 +21,7 @@ const FormInput = styled.input`
   width: 70%;
   height: 4vh;
   border-radius: 30px;
-  border: 2px solid #e535ab;
+  border: 2px solid #1d2355 /*#e535ab*/;
   font-size: 18px;
   text-align: center;
   background-color: #e4e4e4;
