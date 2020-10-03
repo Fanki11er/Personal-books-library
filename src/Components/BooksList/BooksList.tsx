@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useQuery, gql, QueryResult } from "@apollo/client";
+import { BooksData } from "../../types/types";
 
 const ListsWrapper = styled.div`
   display: flex;
@@ -74,56 +76,28 @@ const List = styled.li`
 `;
 
 const BooksList = () => {
+  const booksList = gql`
+    query {
+      books {
+        author
+        title
+        read
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(booksList) as QueryResult<
+    BooksData
+  >;
+  data && renderBooksList(data);
+
   return (
     <>
       <ListsWrapper>
         <Heading>Wszystkie</Heading>
         <Lists>
-          <List>
-            <InsideLists>
-              <MiddleList>Nowa psychologia sukcesu </MiddleList>
-              <MiddleList>Autor: Carol Dweck</MiddleList>
-              <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
-              <MiddleList>Przeczytana:</MiddleList>
-            </InsideLists>
-          </List>
-          <ButtonList>Przeczytane</ButtonList>
-          <List>
-            <InsideLists>
-              <MiddleList>Nowa psychologia sukcesu </MiddleList>
-              <MiddleList>Autor: Carol Dweck</MiddleList>
-              <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
-              <MiddleList>Przeczytana:</MiddleList>
-            </InsideLists>
-          </List>
-          <ButtonList>Przeczytane</ButtonList>
-          <List>
-            <InsideLists>
-              <MiddleList>Nowa psychologia sukcesu </MiddleList>
-              <MiddleList>Autor: Carol Dweck</MiddleList>
-              <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
-              <MiddleList>Przeczytana:</MiddleList>
-            </InsideLists>
-          </List>
-          <ButtonList>Przeczytane</ButtonList>
-          <List>
-            <InsideLists>
-              <MiddleList>Nowa psychologia sukcesu </MiddleList>
-              <MiddleList>Autor: Carol Dweck</MiddleList>
-              <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
-              <MiddleList>Przeczytana:</MiddleList>
-            </InsideLists>
-          </List>
-          <ButtonList>Przeczytane</ButtonList>
-          <List>
-            <InsideLists>
-              <MiddleList>Nowa psychologia sukcesu </MiddleList>
-              <MiddleList>Autor: Carol Dweck</MiddleList>
-              <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
-              <MiddleList>Przeczytana:</MiddleList>
-            </InsideLists>
-          </List>
-          <ButtonList>Przeczytane</ButtonList>
+          {loading ? <p>Loading</p> : undefined}
+          {data ? renderBooksList(data) : undefined}
+          {error ? <p>Error</p> : undefined}
         </Lists>
       </ListsWrapper>
     </>
@@ -131,3 +105,23 @@ const BooksList = () => {
 };
 
 export default BooksList;
+
+const renderBooksList = (data: BooksData) => {
+  const { books } = data;
+
+  return books.map(({ author, title, read }) => {
+    return (
+      <>
+        <List>
+          <InsideLists>
+            <MiddleList>{title} </MiddleList>
+            <MiddleList>{author}</MiddleList>
+            <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
+            <MiddleList>{read ? "Przeczytane" : "Nie przeczytane"}</MiddleList>
+          </InsideLists>
+        </List>
+        <ButtonList>Przeczytane</ButtonList>
+      </>
+    );
+  });
+};

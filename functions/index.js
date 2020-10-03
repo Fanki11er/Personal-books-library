@@ -4,6 +4,7 @@ const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 
 const serviceAccount = require("./Key/firebaseKey.json");
+const { ref } = require("firebase-functions/lib/providers/database");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -20,6 +21,11 @@ typeDefs = gql`
 
   type Query {
     books: [Book]
+    book(title: String!): Book
+  }
+
+  type Mutation {
+    addNewBook(author: String!, title: String, read: Boolean!): Book!
   }
 `;
 
@@ -32,6 +38,37 @@ const resolvers = {
         .once("value")
         .then((snap) => snap.val())
         .then((val) => Object.keys(val).map((key) => val[key]));
+    },
+
+    book: (parent, args) => {
+      const { title } = args;
+      return admin
+        .database()
+        .ref("books")
+        .once("value")
+        .then((snap) => snap.val())
+        .then((val) => {
+          return Object.values(val).find((value) => {
+            return value.title == title;
+          });
+        });
+    },
+  },
+
+  Mutation: {
+    addNewBook: async (parent, args) => {
+      const { author, title, read } = args;
+      const booksRef = admin.database().ref().child("books");
+      const key = (await booksRef.push()).key;
+      const book = { author, title, read, id: key };
+      const updates = {};
+      updates[`${key}`] = book;
+      return await booksRef
+        .update(updates)
+        .then(() => book)
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
