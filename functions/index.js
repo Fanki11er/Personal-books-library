@@ -18,6 +18,7 @@ typeDefs = gql`
     genre: String!
     title: String!
     read: Boolean!
+    addedDate: Int!
   }
 
   type Query {
@@ -66,7 +67,9 @@ const resolvers = {
       const { author, title, genre, read } = args;
       const booksRef = admin.database().ref().child("books");
       const key = (await booksRef.push()).key;
-      const book = { author, title, genre, read, id: key };
+      const data = new Date();
+      const addedDate = data.toLocaleDateString();
+      const book = { author, title, genre, read, id: key, addedDate };
       const updates = {};
       updates[`${key}`] = book;
       return await booksRef
