@@ -26,14 +26,12 @@ const LabelForm = styled.label`
   color: ${({ theme }) => theme.inputLightGray};
   width: 30%;
 `;
-=======
 interface MyFormValues {
   author: string;
   title: string;
   genre: string;
   read: boolean;
 }
->>>>>>> e5cff67... Builder form using Formik
 
 const Button = styled.button`
   width: 150px;

@@ -29,7 +29,6 @@ const FormInput = styled.input`
 
   background-color: ${({ theme }) => theme.inputLightGray};
   margin: 20px;
-
 `;
 
 const CheckboxInput = styled.input`
@@ -48,22 +47,6 @@ interface Props {
   placeholder?: string;
   id?: string;
   type?: string;
-}
-
-const Input = (props: Props) => {
-  const { labelText, smaller, type } = props;
-  return (
-    <InputWrapper smaller={smaller}>
-      <Label>{labelText}:</Label>
-      {type !== "checkbox" ? (
-        <FormInput />
-      ) : (
-        <CheckboxInput type={"checkbox"} />
-      )}
-=======
-  placeholder?: string;
-  id?: string;
-  type?: string;
   field?: FieldInputProps<any>;
 }
 
@@ -72,11 +55,15 @@ const Input = (props: Props) => {
   return (
     <InputWrapper smaller={smaller}>
       <Label htmlFor={id}>{labelText}:</Label>
-      <FormInput
-        placeholder={placeholder}
-        type={type ? type : "text"}
-        {...field}
-      />
+      {type !== "checkbox" ? (
+        <FormInput
+          placeholder={placeholder}
+          type={type ? type : "text"}
+          {...field}
+        />
+      ) : (
+        <CheckboxInput type={"checkbox"} />
+      )}
     </InputWrapper>
   );
 };
