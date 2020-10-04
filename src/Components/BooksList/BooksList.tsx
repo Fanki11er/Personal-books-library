@@ -8,6 +8,7 @@ const ListsWrapper = styled.div`
   background-color: ${({ theme }) => theme.listBlue};
   text-align: center;
   align-items: center;
+  height: 100vh;
 `;
 
 const ButtonList = styled.button`
@@ -24,7 +25,7 @@ const ButtonList = styled.button`
 
 const Lists = styled.ul`
   overflow-y: scroll;
-  max-height: 500px;
+  padding: 20px 0;
 `;
 
 const InsideLists = styled.ul`

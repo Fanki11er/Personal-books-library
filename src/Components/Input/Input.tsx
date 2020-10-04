@@ -7,7 +7,7 @@ interface Wrapper {
 const InputWrapper = styled.div`
   display: flex;
   width: ${(props: Wrapper) => (props.smaller ? "400px" : "500px")};
-  height: 100%;
+  height: 55px;
   justify-content: space-between;
   align-items: center;
   position: relative;
@@ -25,8 +25,10 @@ const FormInput = styled.input`
   border: 2px solid ${({ theme }) => theme.listBlue};
   font-size: 18px;
   text-align: center;
+
   background-color: ${({ theme }) => theme.inputLightGray};
   margin: 20px;
+
 `;
 
 const CheckboxInput = styled.input`
