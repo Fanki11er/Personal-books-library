@@ -5,7 +5,7 @@ import Input from "../Input/Input";
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: ${({ theme }) => theme.formLighterGray};
   flex-direction: column;
 `;
 
@@ -23,17 +23,17 @@ const LangSwitch = styled.button`
   width: 8%;
   height: 4vh;
   border-radius: 30px;
-  border: 2px solid #1d2355 /*#e535ab*/;
+  border: 2px solid ${({ theme }) => theme.listBlue};
   margin: 0 15px;
-  box-shadow: 2px 3px 6px #1d2355; /*#e535ab;*/
+  box-shadow: 2px 3px 6px ${({ theme }) => theme.listBlue};
 `;
 
 const ColorSwitch = styled.button`
   border-radius: 30px;
   width: 8%;
   height: 4vh;
-  border: 2px solid #1d2355 /*#e535ab*/;
-  box-shadow: 2px 3px 6px #1d2355; /*#e535ab*/ ;
+  border: 2px solid ${({ theme }) => theme.listBlue};
+  box-shadow: 2px 3px 6px ${({ theme }) => theme.listBlue};
 `;
 
 const ButtonsWrapper = styled.div`
@@ -43,13 +43,13 @@ const ButtonsWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  border: 2px solid #1d2355 /*#e535ab*/;
+  border: 2px solid ${({ theme }) => theme.listBlue};
   border-radius: 30px;
-  box-shadow: 2px 3px 6px #1d2355 /*#e535ab*/;
+  box-shadow: 2px 3px 6px ${({ theme }) => theme.listBlue};
   width: 200px;
   height: 40px;
   margin: 40px;
-  color: #1d2355;
+  color: ${({ theme }) => theme.listBlue};
   font-weight: bold;
 `;
 

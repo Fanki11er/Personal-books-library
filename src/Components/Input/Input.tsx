@@ -13,7 +13,7 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.label`
-  color: #707070;
+  color: ${({ theme }) => theme.listBlue};
   width: 30%;
 `;
 
@@ -21,10 +21,10 @@ const FormInput = styled.input`
   width: 70%;
   height: 4vh;
   border-radius: 30px;
-  border: 2px solid #1d2355 /*#e535ab*/;
+  border: 2px solid ${({ theme }) => theme.listBlue};
   font-size: 18px;
   text-align: center;
-  background-color: #e4e4e4;
+  background-color: ${({ theme }) => theme.inputLightGray};
   margin: 20px;
 `;
 

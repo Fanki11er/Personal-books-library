@@ -6,7 +6,7 @@ const Form = styled.form`
   display: flex;
   width: 100%;
   height: 50vh;
-  background-color: #f5f5f5;
+  background-color: ${({ theme }) => theme.formLighterGray};
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@ const InputWrapper = styled.div`
 `;
 
 const LabelForm = styled.label`
-  color: #707070;
+  color: ${({ theme }) => theme.inputLightGray};
   width: 30%;
 `;
 

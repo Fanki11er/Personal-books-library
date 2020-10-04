@@ -5,19 +5,19 @@ const ListsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  background-color: #1d2355 /*#e535ab*/;
+  background-color: ${({ theme }) => theme.listBlue};
   text-align: center;
   align-items: center;
 `;
 
 const ButtonList = styled.button`
-  background-color: #4b4b4b;
+  background-color: ${({ theme }) => theme.buttonListBlue};
   border-radius: 30px;
   box-shadow: 2px 3px 6px;
   width: 200px;
   height: 50px;
   font-size: 20px;
-  color: #f5f5f5;
+  color: ${({ theme }) => theme.formLighterGray};
   font-style: italic;
   border: none;
 `;
@@ -35,9 +35,9 @@ const InsideLists = styled.ul`
 `;
 
 const MiddleList = styled.li`
-  color: #f5f5f5;
-  background-color: #e4e4e4 /*#f5f5f5*/;
-  color: #4b4b4b;
+  color: ${({ theme }) => theme.formLighterGray};
+  background-color: ${({ theme }) => theme.inputLightGray};
+  color: ${({ theme }) => theme.buttonLightGray};
   font-size: 20px;
   list-style: none;
   text-align: center;
@@ -48,16 +48,35 @@ const Heading = styled.h2`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: #f5f5f5;
+  color: ${({ theme }) => theme.listBlue};
   border-radius: 30px;
   width: 200px;
   height: 50px;
-  box-shadow: 2px 4px 6px #e4e4e4;
-  background-color: #707070;
+  border-radius: 30px;
+  background-color: ${({ theme }) => theme.inputLightGray};
+  border: 2px solid ${({ theme }) => theme.buttonListBlue};
+`;
+const LoadingImage = styled.img`
+  transform: rotateX("90deg");
+`;
+
+const Loading = styled.div`
+  font-size: 20px;
+  background-color: ${({ theme }) => theme.inputLightGray};
+  border-radius: 30px;
+  text-align: center;
+  font-size: 20px;
+  margin: 20px;
+  width: 600px;
+  height: 20vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const List = styled.li`
-  color: #f5f5f5;
+  color: ${({ theme }) => theme.formLighterGray};
   border-radius: 30px;
   margin: 20px;
   width: 600px;
@@ -66,11 +85,11 @@ const List = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e4e4e4 /*#f5f5f5*/;
-  color: #4b4b4b;
+  background-color: ${({ theme }) => theme.inputLightGray};
+  color: ${({ theme }) => theme.buttonLightGray};
   font-size: 20px;
   list-style: none;
-  box-shadow: 2px 4px 6px #4b4b4b;
+  box-shadow: 2px 4px 6px ${({ theme }) => theme.buttonLightGray};
 `;
 
 const BooksList = () => {
@@ -78,6 +97,11 @@ const BooksList = () => {
     <>
       <ListsWrapper>
         <Heading>Wszystkie</Heading>
+
+        <Loading>
+          <LoadingImage src={"../../assets/svg/Ellipse.svg"} /> Loading
+        </Loading>
+
         <Lists>
           <List>
             <InsideLists>
