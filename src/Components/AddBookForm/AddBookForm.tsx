@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Input from "../Input/Input";
 import { Formik, Form, Field, FieldProps, FormikErrors } from "formik";
-import { useQuery, gql, QueryResult, useMutation } from "@apollo/client";
-import { Book, BookData } from "../../types/types";
+import { gql, useMutation } from "@apollo/client";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -48,8 +47,6 @@ const Button = styled.button`
 `;
 
 const AddBooksForm = () => {
-  //const [book, setNewBook] = useState<Book | undefined>(undefined);
-
   const newBook = gql`
     mutation addBook(
       $author: String!
@@ -65,7 +62,7 @@ const AddBooksForm = () => {
     }
   `;
 
-  const [addNewBook, { data }] = useMutation(newBook);
+  const [addNewBook] = useMutation(newBook);
 
   const initialValues: MyFormValues = {
     author: "",
