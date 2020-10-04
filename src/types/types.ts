@@ -7,3 +7,7 @@ export type Book = {
 export type BooksData = {
   books: [Book];
 };
+
+export type BookData = {
+  book: Book;
+};

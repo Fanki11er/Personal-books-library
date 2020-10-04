@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Input from "../Input/Input";
 import { Formik, Form, Field, FieldProps, FormikErrors } from "formik";
+import { useQuery, gql, QueryResult, useMutation } from "@apollo/client";
+import { Book, BookData } from "../../types/types";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -46,6 +48,25 @@ const Button = styled.button`
 `;
 
 const AddBooksForm = () => {
+  //const [book, setNewBook] = useState<Book | undefined>(undefined);
+
+  const newBook = gql`
+    mutation addBook(
+      $author: String!
+      $title: String!
+      $genre: String!
+      $read: Boolean!
+    ) {
+      addNewBook(author: $author, title: $title, genre: $genre, read: $read) {
+        author
+        title
+        id
+      }
+    }
+  `;
+
+  const [addNewBook, { data }] = useMutation(newBook);
+
   const initialValues: MyFormValues = {
     author: "",
     title: "",
@@ -56,9 +77,15 @@ const AddBooksForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        console.log({ values, actions });
-        alert(JSON.stringify(values, null, 2));
-        actions.setSubmitting(false);
+        const { author, title, genre, read } = values;
+        const book = {
+          author,
+          title,
+          genre,
+          read,
+        };
+
+        addNewBook({ variables: book });
       }}
     >
       {({ isSubmitting }) => (
