@@ -85,7 +85,12 @@ const AddBooksForm = () => {
           read,
         };
 
-        addNewBook({ variables: book });
+        addNewBook({ variables: book })
+          .then(() => {
+            actions.setSubmitting(false);
+            actions.resetForm();
+          })
+          .catch((err) => console.log(err));
       }}
     >
       {({ isSubmitting }) => (
