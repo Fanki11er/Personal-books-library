@@ -118,12 +118,12 @@ const BooksList = () => {
       <ListsWrapper>
         <Heading>Wszystkie</Heading>
 
-        <Loading>
-          <LoadingImage src={"../../assets/svg/Ellipse.svg"} /> Loading
-        </Loading>
-
         <Lists>
-          {loading ? <p>Loading</p> : undefined}
+          {loading ? (
+            <Loading>
+              <LoadingImage src={"../../assets/svg/Ellipse.svg"} /> Loading
+            </Loading>
+          ) : undefined}
           {data ? renderBooksList(data) : undefined}
           {error ? <p>{error.message}</p> : undefined}
         </Lists>

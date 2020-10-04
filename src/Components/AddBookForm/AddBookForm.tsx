@@ -149,9 +149,9 @@ const AddBooksForm = () => {
               );
             }}
           </Field>
-          <button type={"submit"} disabled={isSubmitting}>
+          <Button type={"submit"} disabled={isSubmitting}>
             Send
-          </button>
+          </Button>
         </StyledForm>
       )}
     </Formik>
