@@ -15,6 +15,7 @@ typeDefs = gql`
   type Book {
     id: ID!
     author: String!
+    genre: String!
     title: String!
     read: Boolean!
   }
@@ -25,7 +26,12 @@ typeDefs = gql`
   }
 
   type Mutation {
-    addNewBook(author: String!, title: String, read: Boolean!): Book!
+    addNewBook(
+      author: String!
+      title: String
+      genre: String!
+      read: Boolean!
+    ): Book!
   }
 `;
 
@@ -57,10 +63,10 @@ const resolvers = {
 
   Mutation: {
     addNewBook: async (parent, args) => {
-      const { author, title, read } = args;
+      const { author, title, genre, read } = args;
       const booksRef = admin.database().ref().child("books");
       const key = (await booksRef.push()).key;
-      const book = { author, title, read, id: key };
+      const book = { author, title, genre, read, id: key };
       const updates = {};
       updates[`${key}`] = book;
       return await booksRef
