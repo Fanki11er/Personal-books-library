@@ -10,10 +10,11 @@ const InputWrapper = styled.div`
   height: 55px;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 
 const Label = styled.label`
-  color: #707070;
+  color: ${({ theme }) => theme.listBlue};
   width: 30%;
 `;
 
@@ -21,24 +22,41 @@ const FormInput = styled.input`
   width: 70%;
   height: 4vh;
   border-radius: 30px;
-  border: 2px solid #e535ab;
+  border: 2px solid ${({ theme }) => theme.listBlue};
   font-size: 18px;
   text-align: center;
-  background-color: #e4e4e4;
-  margin: 5px 20px;
+
+  background-color: ${({ theme }) => theme.inputLightGray};
+  margin: 20px;
+
+`;
+
+const CheckboxInput = styled.input`
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 150px;
 `;
 
 interface Props {
   labelText: string;
   smaller?: boolean;
+  type?: string;
 }
 
 const Input = (props: Props) => {
-  const { labelText, smaller } = props;
+  const { labelText, smaller, type } = props;
   return (
     <InputWrapper smaller={smaller}>
       <Label>{labelText}:</Label>
-      <FormInput />
+      {type !== "checkbox" ? (
+        <FormInput />
+      ) : (
+        <CheckboxInput type={"checkbox"} />
+      )}
     </InputWrapper>
   );
 };
