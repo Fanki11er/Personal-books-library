@@ -53,8 +53,8 @@ const Heading = styled.h2`
   width: 200px;
   height: 50px;
   border-radius: 30px;
-  background-color: ${({ theme }) => theme.inputLightGray};
-  border: 2px solid ${({ theme }) => theme.buttonListBlue};
+  background-color: ${({ theme }) => theme.buttonorange};
+  box-shadow: 2px 4px 6px ${({ theme }) => theme.formLighterGray};
 `;
 const LoadingImage = styled.img`
   transform: rotateX("90deg");

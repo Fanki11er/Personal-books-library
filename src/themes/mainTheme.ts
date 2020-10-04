@@ -5,7 +5,7 @@ const theme = {
   inputLightGray: "#e4e4e4",
   buttonLightGray: "#4b4b4b",
   buttonListBlue: "#405F81",
-  loadingOrange: "#FEC554",
+  buttonorange: "#F5C02D",
 };
 
 export default theme;
