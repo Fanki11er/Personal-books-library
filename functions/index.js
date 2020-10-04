@@ -18,7 +18,7 @@ typeDefs = gql`
     genre: String!
     title: String!
     read: Boolean!
-    addedDate: Int!
+    addedDate: String!
   }
 
   type Query {
