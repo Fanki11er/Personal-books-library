@@ -58,6 +58,7 @@ const SearchWrapper = styled.div`
   width: 100%;
   justify-content: center;
   height: 100%;
+  font-size: 18px;
 `;
 
 const Navigation = () => {

@@ -10,6 +10,7 @@ const InputWrapper = styled.div`
   height: 100%;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -28,17 +29,32 @@ const FormInput = styled.input`
   margin: 20px;
 `;
 
+const CheckboxInput = styled.input`
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 150px;
+`;
+
 interface Props {
   labelText: string;
   smaller?: boolean;
+  type?: string;
 }
 
 const Input = (props: Props) => {
-  const { labelText, smaller } = props;
+  const { labelText, smaller, type } = props;
   return (
     <InputWrapper smaller={smaller}>
       <Label>{labelText}:</Label>
-      <FormInput />
+      {type !== "checkbox" ? (
+        <FormInput />
+      ) : (
+        <CheckboxInput type={"checkbox"} />
+      )}
     </InputWrapper>
   );
 };
