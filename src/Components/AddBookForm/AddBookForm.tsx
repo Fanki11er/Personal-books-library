@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Input from "../Input/Input";
+import { Formik, Form, Field, FieldProps, FormikErrors } from "formik";
 
-const Form = styled.form`
+const StyledForm = styled(Form)`
   display: flex;
   width: 100%;
   height: 50vh;
@@ -24,6 +25,14 @@ const LabelForm = styled.label`
   color: ${({ theme }) => theme.inputLightGray};
   width: 30%;
 `;
+=======
+interface MyFormValues {
+  author: string;
+  title: string;
+  genre: string;
+  read: boolean;
+}
+>>>>>>> e5cff67... Builder form using Formik
 
 const Button = styled.button`
   width: 150px;
@@ -37,16 +46,88 @@ const Button = styled.button`
 `;
 
 const AddBooksForm = () => {
+  const initialValues: MyFormValues = {
+    author: "",
+    title: "",
+    genre: "",
+    read: false,
+  };
   return (
-    <>
-      <Form>
-        <Input smaller labelText={"Tytuł"} />
-        <Input smaller labelText={"Autor"} />
-        <Input smaller labelText={"Gatunek"} />
-        <Input smaller labelText={"Przeczytane?"} type="checkbox" />
-        <Button>Add new book</Button>
-      </Form>
-    </>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values, actions) => {
+        console.log({ values, actions });
+        alert(JSON.stringify(values, null, 2));
+        actions.setSubmitting(false);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <StyledForm>
+          <Field name="title">
+            {(data: FieldProps & FormikErrors<any>) => {
+              const { field, meta, errors } = data;
+              return (
+                <Input
+                  smaller
+                  labelText={"Tytuł"}
+                  id={"title"}
+                  type={"text"}
+                  field={field}
+                  placeholder="Tytuł"
+                />
+              );
+            }}
+          </Field>
+          <Field name="author">
+            {(data: FieldProps & FormikErrors<any>) => {
+              const { field, meta, errors } = data;
+              return (
+                <Input
+                  smaller
+                  labelText={"Autor"}
+                  id={"author"}
+                  type={"text"}
+                  field={field}
+                  placeholder="Autor"
+                />
+              );
+            }}
+          </Field>
+          <Field name="genre">
+            {(data: FieldProps & FormikErrors<any>) => {
+              const { field, meta, errors } = data;
+              return (
+                <Input
+                  smaller
+                  labelText={"Gatunek"}
+                  id={"genre"}
+                  type={"text"}
+                  field={field}
+                  placeholder="Gatunek"
+                />
+              );
+            }}
+          </Field>
+          <Field name="read">
+            {(data: FieldProps & FormikErrors<any>) => {
+              const { field, meta, errors } = data;
+              return (
+                <Input
+                  smaller
+                  labelText={"Przeczytana?"}
+                  id={"read"}
+                  type={"checkbox"}
+                  field={field}
+                />
+              );
+            }}
+          </Field>
+          <button type={"submit"} disabled={isSubmitting}>
+            Send
+          </button>
+        </StyledForm>
+      )}
+    </Formik>
   );
 };
 
