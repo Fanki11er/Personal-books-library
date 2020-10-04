@@ -102,6 +102,9 @@ const BooksList = () => {
         author
         title
         read
+        genre
+        addedDate
+        id
       }
     }
   `;
@@ -122,7 +125,7 @@ const BooksList = () => {
         <Lists>
           {loading ? <p>Loading</p> : undefined}
           {data ? renderBooksList(data) : undefined}
-          {error ? <p>Error</p> : undefined}
+          {error ? <p>{error.message}</p> : undefined}
         </Lists>
       </ListsWrapper>
     </>
@@ -134,19 +137,23 @@ export default BooksList;
 const renderBooksList = (data: BooksData) => {
   const { books } = data;
 
-  return books.map(({ author, title, read }) => {
-    return (
-      <>
-        <List>
-          <InsideLists>
-            <MiddleList>{title} </MiddleList>
-            <MiddleList>{author}</MiddleList>
-            <MiddleList>Gatunek: Psychologia Czytana</MiddleList>
-            <MiddleList>{read ? "Przeczytane" : "Nie przeczytane"}</MiddleList>
-          </InsideLists>
-        </List>
-        <ButtonList>Przeczytane</ButtonList>
-      </>
-    );
-  });
+  if (books)
+    return books.map(({ author, title, read, addedDate, genre, id }) => {
+      return (
+        <>
+          <List key={id}>
+            <InsideLists>
+              <MiddleList>{title} </MiddleList>
+              <MiddleList>{author}</MiddleList>
+              <MiddleList>{`Gatunek: ${genre}`}</MiddleList>
+              <MiddleList>{`Dodano: ${addedDate}`}</MiddleList>
+              <MiddleList>
+                {read ? "Przeczytane" : "Nie przeczytane"}
+              </MiddleList>
+            </InsideLists>
+          </List>
+          <ButtonList>Przeczytane</ButtonList>
+        </>
+      );
+    });
 };

@@ -38,18 +38,20 @@ typeDefs = gql`
 
 const resolvers = {
   Query: {
-    books: () => {
-      return admin
+    books: async () => {
+      return await admin
         .database()
         .ref("books")
         .once("value")
         .then((snap) => snap.val())
-        .then((val) => Object.keys(val).map((key) => val[key]));
+        .then((val) => {
+          if (val) return Object.keys(val).map((key) => val[key]);
+        });
     },
 
-    book: (parent, args) => {
+    book: async (parent, args) => {
       const { title } = args;
-      return admin
+      return await admin
         .database()
         .ref("books")
         .once("value")
