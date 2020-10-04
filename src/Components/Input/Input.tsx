@@ -1,3 +1,4 @@
+import { FieldInputProps } from "formik";
 import React from "react";
 import styled from "styled-components";
 
@@ -28,7 +29,6 @@ const FormInput = styled.input`
 
   background-color: ${({ theme }) => theme.inputLightGray};
   margin: 20px;
-
 `;
 
 const CheckboxInput = styled.input`
@@ -44,16 +44,23 @@ const CheckboxInput = styled.input`
 interface Props {
   labelText: string;
   smaller?: boolean;
+  placeholder?: string;
+  id?: string;
   type?: string;
+  field?: FieldInputProps<any>;
 }
 
 const Input = (props: Props) => {
-  const { labelText, smaller, type } = props;
+  const { labelText, smaller, placeholder, id, type, field } = props;
   return (
     <InputWrapper smaller={smaller}>
-      <Label>{labelText}:</Label>
+      <Label htmlFor={id}>{labelText}:</Label>
       {type !== "checkbox" ? (
-        <FormInput />
+        <FormInput
+          placeholder={placeholder}
+          type={type ? type : "text"}
+          {...field}
+        />
       ) : (
         <CheckboxInput type={"checkbox"} />
       )}

@@ -15,8 +15,10 @@ typeDefs = gql`
   type Book {
     id: ID!
     author: String!
+    genre: String!
     title: String!
     read: Boolean!
+    addedDate: String!
   }
 
   type Query {
@@ -25,24 +27,31 @@ typeDefs = gql`
   }
 
   type Mutation {
-    addNewBook(author: String!, title: String, read: Boolean!): Book!
+    addNewBook(
+      author: String!
+      title: String
+      genre: String!
+      read: Boolean!
+    ): Book!
   }
 `;
 
 const resolvers = {
   Query: {
-    books: () => {
-      return admin
+    books: async () => {
+      return await admin
         .database()
         .ref("books")
         .once("value")
         .then((snap) => snap.val())
-        .then((val) => Object.keys(val).map((key) => val[key]));
+        .then((val) => {
+          if (val) return Object.keys(val).map((key) => val[key]);
+        });
     },
 
-    book: (parent, args) => {
+    book: async (parent, args) => {
       const { title } = args;
-      return admin
+      return await admin
         .database()
         .ref("books")
         .once("value")
@@ -57,10 +66,12 @@ const resolvers = {
 
   Mutation: {
     addNewBook: async (parent, args) => {
-      const { author, title, read } = args;
+      const { author, title, genre, read } = args;
       const booksRef = admin.database().ref().child("books");
       const key = (await booksRef.push()).key;
-      const book = { author, title, read, id: key };
+      const data = new Date();
+      const addedDate = data.toLocaleDateString();
+      const book = { author, title, genre, read, id: key, addedDate };
       const updates = {};
       updates[`${key}`] = book;
       return await booksRef
